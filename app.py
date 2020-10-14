@@ -2,19 +2,24 @@ from tkinter import *
 import youtube_dl
 import os
 
+root = Tk()
+
+default_height = 750
+default_width = 500
+
 
 class Interface(Frame):
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)
         Frame(self, master)
-        self.grid()
+        self.grid(pady=50, padx=240, ipadx=1)
 
-        self.fnameLabel = Label(master, text="Url del video")
-        self.fnameLabel.grid()
+        self.fnameLabel = Label(master, text="Introduce la URL del video por favor")
+        self.fnameLabel.grid(rowspan=10)
 
         self.videoNameEntry = StringVar()
         self.videoName = Entry(textvariable=self.videoNameEntry)
-        self.videoName.grid()
+        self.videoName.grid(rowspan=10)
 
         def buttonClick(videoNameEntry):
             print(videoNameEntry.get())
@@ -30,6 +35,7 @@ class Interface(Frame):
                 'format': 'bestaudio/best',
                 'keepvideo': False,
                 'outtmpl': filename_output,
+                'logger': Logger(),
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
@@ -38,18 +44,20 @@ class Interface(Frame):
             }
 
             with youtube_dl.YoutubeDL(options) as ydl:
-                #ydl.download(videoNameEntry.get())
                 info = ydl.extract_info(videoNameEntry.get(), download=True)
                 print('The duration is {0}'.format(info['duration']))
 
+                if format(info['status']) == 'finished':
+                    videoNameEntry = None
+
         self.submitButton = Button(master, text="Descargar", command=lambda: buttonClick(videoNameEntry=self.videoName))
         self.submitButton.wait_variable(self.videoNameEntry)
-        self.submitButton.grid()
+        self.submitButton.grid(rowspan=2, pady=5)
 
 
 # We use this as a logger for all the errors we might get downloading the video
 class Logger(object):
-    def debug (self, msg):
+    def debug(self, msg):
         pass
 
     def warning(self, msg):
@@ -60,5 +68,6 @@ class Logger(object):
 
 
 if __name__ == "__main__":
+    root.geometry('500x750')
     guiFrame = Interface()
     guiFrame.mainloop()
