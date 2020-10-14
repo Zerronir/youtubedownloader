@@ -21,6 +21,7 @@ class Interface(Frame):
         self.submitButton.grid()
 
 
+# We use this as a logger for all the errors we might get downloading the video
 class Logger(object):
     def debug (self, msg):
         pass
