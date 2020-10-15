@@ -22,7 +22,7 @@ class Interface(Frame):
         self.videoName.grid(rowspan=10)
 
         def buttonClick(videoNameEntry):
-            print(videoNameEntry.get())
+            print("Descargando: " + videoNameEntry.get())
             video_info = youtube_dl.YoutubeDL().extract_info(
                 videoNameEntry.get(), download=False
             )

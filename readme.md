@@ -14,9 +14,11 @@ To download this program you must run the next command in your terminal:
 Windows:
 - Win + R and type `cmd` then press enter
 - Go to a folder using your terminal and write `git clone https://github.com/Zerronir/youtubedownloader.git`
+- Install ffmpeg using `choco install ffmpeg`.
 - Go to the folder and type this `py app.py` to run the app
 
 Linux/Mac:
 - Open your terminal and navigate to an empty folder or create one `mkdir foldername`
 - Once in the folder use clone command from git: `git clone https://github.com/Zerronir/youtubedownloader.git`
 - Run the app by typing `py app.py` and enjoy
+- Install ffmpeg library using `brew install ffmpeg` on Mac or `sudo apt-get install ffmpeg` if you're on linux
