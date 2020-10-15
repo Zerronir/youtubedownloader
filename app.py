@@ -1,6 +1,6 @@
+from __future__ import unicode_literals
 from tkinter import *
 import youtube_dl
-import os
 
 root = Tk()
 
@@ -36,19 +36,17 @@ class Interface(Frame):
                 'keepvideo': False,
                 'outtmpl': filename_output,
                 'logger': Logger(),
+                'no_check_certificate': True,
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
-                    'preferredquality': '320'
+                    'preferredquality': '192'
                 }]
             }
 
             with youtube_dl.YoutubeDL(options) as ydl:
                 info = ydl.extract_info(videoNameEntry.get(), download=True)
                 print('The duration is {0}'.format(info['duration']))
-
-                if format(info['status']) == 'finished':
-                    videoNameEntry = None
 
         self.submitButton = Button(master, text="Descargar", command=lambda: buttonClick(videoNameEntry=self.videoName))
         self.submitButton.wait_variable(self.videoNameEntry)
