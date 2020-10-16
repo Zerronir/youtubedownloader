@@ -28,7 +28,7 @@ class Interface(Frame):
             )
 
             # Create the filename of the video using the filename_output variable
-            filename_output = f"{video_info['title']}.mp3"
+            filename_output = f"./Downloaded/{video_info['title']}.mp3"
 
             # Setting up the options for downloading only audio
             options = {
@@ -40,7 +40,7 @@ class Interface(Frame):
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'mp3',
-                    'preferredquality': '192'
+                    'preferredquality': '320'
                 }]
             }
 
